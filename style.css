@@ -1,3 +1,10 @@
 #result {
   color: red;
 }
+
+.stat-table {
+  border-collapse: collapse;
+}
+.stat-table th, .stat-table td {
+  border: 1px solid #000;
+}

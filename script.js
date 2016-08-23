@@ -4,5 +4,5 @@ function calculate(){
   var level = document.getElementById("level").value;
   var con = document.getElementById("con").value
   var hp = (multiplier * (level-1) * 17) + (con * 85);
-  document.getElementById("result").innerHTML = hp;
+  document.getElementById("hp").innerHTML = hp;
 }

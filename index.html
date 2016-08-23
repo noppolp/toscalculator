@@ -14,12 +14,95 @@
     <option value="1.4">Archer</option>
     <option value="1.5">Cleric</option>
   </select>
-  Level: <input type="text" id="level">
-  Con: <input type="text" id="con">
+  Level: <input type="text" id="level" value="1">
   <input type="button" value="Calculate" onclick="calculate()">
+  <h3>Stat Calculator</h3>
+  <p>Invested Stat Point</p>
+  <table class="stat-table">
+    <tr>
+      <th>STR</th>
+      <th>INT</th>
+      <th>CON</th>
+      <th>SPR</th>
+      <th>DEX</th>
+    </tr>
+    <tr>
+      <td>
+        <input type="text" id="inves-str" value="0">
+      </td>
+      <td>
+        <input type="text" id="inves-int" value="0">
+      </td>
+      <td>
+        <input type="text" id="inves-con" value="0">
+      </td>
+      <td>
+        <input type="text" id="inves-spr" value="0">
+      </td>
+      <td>
+        <input type="text" id="inves-dex" value="0">
+      </td>
+    </tr>
+  </table>
+
+  <p>Item Stat Point</p>
+  <table class="stat-table">
+    <tr>
+      <th>STR</th>
+      <th>INT</th>
+      <th>CON</th>
+      <th>SPR</th>
+      <th>DEX</th>
+    </tr>
+    <tr>
+      <td>
+        <input type="text" id="item-str" value="0">
+      </td>
+      <td>
+        <input type="text" id="item-int" value="0">
+      </td>
+      <td>
+        <input type="text" id="item-con" value="0">
+      </td>
+      <td>
+        <input type="text" id="item-spr" value="0">
+      </td>
+      <td>
+        <input type="text" id="item-dex" value="0">
+      </td>
+    </tr>
+  </table>
+
+  <p>Actual Stat Point</p>
+  <table class="stat-table">
+    <tr>
+      <th>STR</th>
+      <th>INT</th>
+      <th>CON</th>
+      <th>SPR</th>
+      <th>DEX</th>
+    </tr>
+    <tr>
+      <td>
+        <span id="actual-str">0</span>
+      </td>
+      <td>
+        <span id="actual-int">0</span>
+      </td>
+      <td>
+        <span id="actual-con">0</span>
+      </td>
+      <td>
+        <span id="actual-spr">0</span>
+      </td>
+      <td>
+        <span id="actual-dex">0</span>
+      </td>
+    </tr>
+  </table>
 
   <p>
-  <h3>Result: <span id="result"></span></h3>
+  <h3>HP: <span id="hp"></span></h3>
   </p>
 
   <p><small>Cr. LegendaryChinCop</small></p>
