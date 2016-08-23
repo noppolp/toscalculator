@@ -86,22 +86,34 @@ function calculate(){
 
 function calBonusStat(baseStat, invesStat){
   var result = baseStat;
+  var l1 = 0;
+  var l2 = 0;
+  var l3 = 0;
+  var l4 = 0;
   for (var i = 0; i < invesStat; i++) {
     result++;
     if (result >= 1 && result <= 50) {
-      if (result%5===0) {
+      l1++;
+      if (l1 === 5) {
+        l1 = 1;
         result++;
       }
     }else if (result >= 51 && result <= 150) {
-      if (result%4===0) {
+      l2++;
+      if (l2 === 4) {
+        l2 = 1;
         result++;
       }
     }else if (result >= 151 && result <= 300) {
-      if (result%3===0) {
+      l3++;
+      if (l3 === 3) {
+        l3 = 1;
         result++;
       }
     }else if (result >= 300 && result <= 500) {
-      if (result%2===0) {
+      l4++;
+      if (l4 === 2) {
+        l4 = 1;
         result++;
       }
     }else if (result >= 501) {
