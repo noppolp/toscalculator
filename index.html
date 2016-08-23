@@ -1,0 +1,29 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+  <link rel="stylesheet" media="screen" href="style.css" />
+</head>
+<body>
+  <h2>Base HP Calculator</h2>
+  Class:
+  <select id="base-class">
+    <option value="3.3">Swordman</option>
+    <option value="1.1">Wizard</option>
+    <option value="1.4">Archer</option>
+    <option value="1.5">Cleric</option>
+  </select>
+  Level: <input type="text" id="level">
+  Con: <input type="text" id="con">
+  <input type="button" value="Calculate" onclick="calculate()">
+
+  <p>
+  <h3>Result: <span id="result"></span></h3>
+  </p>
+
+  <p><small>Cr. LegendaryChinCop</small></p>
+
+  <script src="script.js"></script>
+</body>
+</html>
