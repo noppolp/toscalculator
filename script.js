@@ -52,11 +52,11 @@ function calculate(){
         break;
   }
 
-  var actualStr = Math.ceil(((calBonusStat(baseStr, invesStr)) * 1.6) + itemStr);
-  var actualCon = Math.ceil(calBonusStat(baseCon, invesCon) + itemCon);
-  var actualInt = Math.ceil(((calBonusStat(baseInt, invesInt)) * 1.6) + itemInt);
-  var actualSpr = Math.ceil(calBonusStat(baseSpr, invesSpr) + itemSpr);
-  var actualDex = Math.ceil(calBonusStat(baseDex, invesDex) + itemDex);
+  var actualStr = Math.ceil(((baseStr + invesStr + getBonusStat(baseStr + invesStr)) * 1.6) + itemStr);
+  var actualCon = Math.ceil(baseCon + invesCon + getBonusStat(baseCon + invesCon) + itemCon);
+  var actualInt = Math.ceil(((baseInt + invesInt + getBonusStat(baseInt + invesInt)) * 1.6) + itemInt);
+  var actualSpr = Math.ceil(baseSpr + invesSpr + getBonusStat(baseSpr + invesSpr) + itemSpr);
+  var actualDex = Math.ceil(baseDex + invesDex + getBonusStat(baseDex + invesDex) + itemDex);
   // Display Stat Result
   document.getElementById("actual-str").innerHTML = actualStr;
   document.getElementById("actual-con").innerHTML = actualCon;
@@ -84,29 +84,18 @@ function calculate(){
   document.getElementById("hp").innerHTML = hp;
 }
 
-function calBonusStat(baseStat, invesStat){
-  var result = baseStat;
-  for (var i = 0; i < invesStat; i++) {
-    result++;
-    if (result >= 1 && result <= 50) {
-      if (result%5===0) {
-        result++;
-      }
-    }else if (result >= 51 && result <= 150) {
-      if (result%4===0) {
-        result++;
-      }
-    }else if (result >= 151 && result <= 300) {
-      if (result%3===0) {
-        result++;
-      }
-    }else if (result >= 300 && result <= 500) {
-      if (result%2===0) {
-        result++;
-      }
-    }else if (result >= 501) {
-      result++;
+function getBonusStat(statValue) {
+    statBonus = 0;
+    if(statValue < 51) {
+      statBonus = statValue / 5;
+    } else if(statValue < 151) {
+      statBonus = 50 / 5 + (statValue - 50) / 4;
+    } else if(statValue < 301) {
+      statBonus = 50 / 5 + 100 / 4 + (statValue - 150) / 3;
+    } else if(statValue < 501) {
+      statBonus = 50 / 5 + 100 / 4 + 150 / 3 + (statValue - 300) / 2;
+    } else {
+      statBonus = 50 / 5 + 100 / 4 + 150 / 3 + 200 / 2 + (statValue - 500);
     }
-  }
-  return result;
-}
+    return Math.ceil(statBonus);
+};
