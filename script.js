@@ -81,12 +81,27 @@ function calculate(){
   document.getElementById("hp").innerHTML = hp;
   
   //sp
-  var sp = Math.ceil((spMod * (level-1) * 6.7) + (actualSpr * 13));
+  var sp = (spMod * (level-1) * 6.7) + (actualSpr * 13);
   if( baseClass === "cleric" )
   {
 	  sp = sp + (level * 1.675);
   }
+  sp = Math.ceil(sp);
   document.getElementById("sp").innerHTML = sp;	
+  
+  //HP recov
+  var hpre = Math.ceil(level * 0.5) + actualCon;
+  document.getElementById("hpre").innerHTML = hpre;
+    
+  //SP recov
+  var spre = (level * 0.5) + actualSpr;
+  if( baseClass === "cleric" )
+  {
+	  spre = spre + (level * 0.25);
+  }
+  Math.ceil(spre);
+  document.getElementById("spre").innerHTML = spre;
+  
 }
 
 
