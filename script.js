@@ -21,6 +21,7 @@ function calculate(){
   var baseInt = 0;
   var baseSpr = 0;
   var baseDex = 0;
+  //basestat
   switch(baseClass) {
     case "swordman":
         baseStr = 7;
@@ -52,11 +53,11 @@ function calculate(){
         break;
   }
 
-  var actualStr = Math.ceil(((calBonusStat(baseStr, invesStr)) * 1.6) + itemStr);
-  var actualCon = Math.ceil(calBonusStat(baseCon, invesCon) + itemCon);
-  var actualInt = Math.ceil(((calBonusStat(baseInt, invesInt)) * 1.6) + itemInt);
-  var actualSpr = Math.ceil(calBonusStat(baseSpr, invesSpr) + itemSpr);
-  var actualDex = Math.ceil(calBonusStat(baseDex, invesDex) + itemDex);
+  var actualStr = Math.ceil(((calBonusStat(invesStr) + baseStr + invesStr)* 1.6) + itemStr);
+  var actualCon = Math.ceil(calBonusStat(invesCon) + baseCon + invesCon + itemCon);
+  var actualInt = Math.ceil(((calBonusStat(invesInt) + baseInt + invesInt) * 1.6) + itemInt);
+  var actualSpr = Math.ceil(calBonusStat(invesSpr) + baseSpr + invesSpr + itemSpr);
+  var actualDex = Math.ceil(calBonusStat(invesDex) + baseDex + invesDex + itemDex);
   // Display Stat Result
   document.getElementById("actual-str").innerHTML = actualStr;
   document.getElementById("actual-con").innerHTML = actualCon;
@@ -84,27 +85,27 @@ function calculate(){
   document.getElementById("hp").innerHTML = hp;
 }
 
-function calBonusStat(baseStat, invesStat){
-  var result = baseStat;
-  for (var i = 0; i < invesStat; i++) {
-    result++;
-    if (result >= 1 && result <= 50) {
-      if (result%5===0) {
+function calBonusStat(invesStat){
+  var result = 0;
+  for (var i = 0; i <= invesStat; i++) {
+    //result++;
+    if (i >= 1 && i <= 50) {
+      if (i%5===0) {
         result++;
       }
-    }else if (result >= 51 && result <= 150) {
-      if (result%4===0) {
+    }else if (i >= 51 && i <= 150) {
+      if (i%4===0) {
         result++;
       }
-    }else if (result >= 151 && result <= 300) {
-      if (result%3===0) {
+    }else if (i >= 151 && i <= 300) {
+      if (i%3===0) {
         result++;
       }
-    }else if (result >= 300 && result <= 500) {
-      if (result%2===0) {
+    }else if (i >= 300 && i <= 500) {
+      if (i%2===0) {
         result++;
       }
-    }else if (result >= 501) {
+    }else if (i >= 501) {
       result++;
     }
   }
