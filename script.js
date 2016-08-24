@@ -2,7 +2,7 @@ function calculate(){
   //base info
   var baseClass = document.getElementById("base-class").value;
   var level = document.getElementById("level").value;
-
+  var rank = document.getElementById("rank").value;
   //stat
   var invesStr = parseInt(document.getElementById("inves-str").value);
   var invesCon = parseInt(document.getElementById("inves-con").value);
@@ -21,6 +21,8 @@ function calculate(){
   var baseInt = 0;
   var baseSpr = 0;
   var baseDex = 0;
+  var hpMod = 0;
+  var spMod = 0;
   //basestat
   switch(baseClass) {
     case "swordman":
@@ -29,6 +31,8 @@ function calculate(){
         baseInt = 2;
         baseSpr = 3;
         baseDex = 5;
+		hpMod = 3.3;
+		spMod = 0.8;
         break;
     case "wizard":
         baseStr = 3;
@@ -36,6 +40,8 @@ function calculate(){
         baseInt = 8;
         baseSpr = 7;
         baseDex = 4;
+		hpMod = 1.1;
+		spMod = 1.2;
         break;
     case "archer":
         baseStr = 6;
@@ -43,6 +49,8 @@ function calculate(){
         baseInt = 3;
         baseSpr = 4;
         baseDex = 8;
+		hpMod = 1.4;
+		spMod = 0.9;
         break;
     case "cleric":
         baseStr = 5;
@@ -50,12 +58,15 @@ function calculate(){
         baseInt = 4;
         baseSpr = 4;
         baseDex = 3;
+		hpMod = 1.5;
+		spMod = 1.2;
         break;
   }
 
-  var actualStr = Math.ceil(((calBonusStat(invesStr) + baseStr + invesStr)* 1.6) + itemStr);
+  // bonus str/int เรามั่ว
+  var actualStr = Math.ceil(((calBonusStat(invesStr) + baseStr + invesStr)* (1 + ((rank - 1)/10))) + itemStr);
   var actualCon = Math.ceil(calBonusStat(invesCon) + baseCon + invesCon + itemCon);
-  var actualInt = Math.ceil(((calBonusStat(invesInt) + baseInt + invesInt) * 1.6) + itemInt);
+  var actualInt = Math.ceil(((calBonusStat(invesInt) + baseInt + invesInt) * (1 + ((rank - 1)/10))) + itemInt);
   var actualSpr = Math.ceil(calBonusStat(invesSpr) + baseSpr + invesSpr + itemSpr);
   var actualDex = Math.ceil(calBonusStat(invesDex) + baseDex + invesDex + itemDex);
   // Display Stat Result
@@ -65,25 +76,19 @@ function calculate(){
   document.getElementById("actual-spr").innerHTML = actualSpr;
   document.getElementById("actual-dex").innerHTML = actualDex;
 
-  //HP
-  var multiplier = 0;
-  switch(baseClass) {
-    case "swordman":
-        multiplier = 3.3;
-        break;
-    case "wizard":
-        multiplier = 1.1;
-        break;
-    case "archer":
-        multiplier = 1.4;
-        break;
-    case "cleric":
-        multiplier = 1.5;
-        break;
-  }
-  var hp = Math.ceil((multiplier * (level-1) * 17) + (actualCon * 85));
+  //hp
+  var hp = Math.ceil((hpMod * (level-1) * 17) + (actualCon * 85));
   document.getElementById("hp").innerHTML = hp;
+  
+  //sp
+  var sp = Math.ceil((spMod * (level-1) * 6.7) + (actualSpr * 13));
+  if( baseClass === "cleric" )
+  {
+	  sp = sp + (level * 1.675);
+  }
+  document.getElementById("sp").innerHTML = sp;	
 }
+
 
 function calBonusStat(invesStat){
   var result = 0;
