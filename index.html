@@ -1,110 +1,120 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../favicon.ico">
+   
+  <title>TOS Calculator by LegendaryChinCop</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
 
   <link rel="stylesheet" media="screen" href="style.css" />
 </head>
 <body>
+<div class="container">
+
   <h2>TOS Stat Calculator</h2>
-  Class:
-  <select id="base-class">
-    <option value="swordman">Swordman</option>
-    <option value="wizard">Wizard</option>
-    <option value="archer">Archer</option>
-    <option value="cleric">Cleric</option>
-  </select>
-  Level: <input type="text" id="level" value="1">
-  Rank:  <input type="text" id="rank" value="1">
+  <div class="row">
+    <div class="col-md-3">Class:
+	  <select id="base-class" class="form-control">
+        <option value="swordman">Swordman</option>
+        <option value="wizard">Wizard</option>
+        <option value="archer">Archer</option>
+        <option value="cleric">Cleric</option>
+      </select>
+	</div>
+    <div class="col-md-3">Level:
+	  <input type="text" id="level" class="form-control" value="1">
+	</div>
+    <div class="col-md-3">Rank:
+	  <input type="text" id="rank" class="form-control" value="1">
+    </div>
+  </div>
+ 
   <h3>Stat Calculator</h3>
+
   <p>Invested Stat Point</p>
-  <table class="stat-table">
-    <tr>
-      <th>STR</th>
-      <th>CON</th>
-      <th>INT</th>
-      <th>SPR</th>
-      <th>DEX</th>
-    </tr>
-    <tr>
-      <td>
-        <input type="text" id="inves-str" value="0">
-      </td>
-      <td>
-        <input type="text" id="inves-con" value="0">
-      </td>
-      <td>
-        <input type="text" id="inves-int" value="0">
-      </td>
-      <td>
-        <input type="text" id="inves-spr" value="0">
-      </td>
-      <td>
-        <input type="text" id="inves-dex" value="0">
-      </td>
-    </tr>
-  </table>
+  <div class="row">
+    <div class="col-md-2">
+      STR
+	  <input type="text" id="inves-str" class="form-control" value="0">
+    </div>
+    <div class="col-md-2">
+      CON
+	  <input type="text" id="inves-con" class="form-control" value="0">
+    </div>
+    <div class="col-md-2">
+      INT
+      <input type="text" id="inves-int" class="form-control" value="0">
+    </div>
+    <div class="col-md-2">
+      SPR
+      <input type="text" id="inves-spr" class="form-control" value="0">
+    </div>
+	<div class="col-md-2">
+      DEX
+      <input type="text" id="inves-dex" class="form-control" value="0">
+    </div>
+  </div>
 
   <p>Item Stat Point</p>
-  <table class="stat-table">
-    <tr>
-      <th>STR</th>
-      <th>CON</th>
-      <th>INT</th>
-      <th>SPR</th>
-      <th>DEX</th>
-    </tr>
-    <tr>
-      <td>
-        <input type="text" id="item-str" value="0">
-      </td>
-      <td>
-        <input type="text" id="item-con" value="0">
-      </td>
-      <td>
-        <input type="text" id="item-int" value="0">
-      </td>
-      <td>
-        <input type="text" id="item-spr" value="0">
-      </td>
-      <td>
-        <input type="text" id="item-dex" value="0">
-      </td>
-    </tr>
-  </table>
-
+  <div class="row">
+    <div class="col-md-2">
+      STR
+	  <input type="text" id="item-str" class="form-control" value="0">
+    </div>
+    <div class="col-md-2">
+      CON
+      <input type="text" id="item-con" class="form-control" value="0">
+    </div>
+    <div class="col-md-2">
+      INT
+      <input type="text" id="item-int" class="form-control" value="0">
+    </div>
+    <div class="col-md-2">
+      SPR
+      <input type="text" id="item-spr" class="form-control" value="0">
+    </div>
+	<div class="col-md-2">
+      DEX
+        <input type="text" id="item-dex" class="form-control" value="0">
+    </div>
+  </div>
+  
+  
   <p>
     <input type="button" value="Calculate" onclick="calculate()">
   </p>
 
   <p>Actual Stat Point</p>
-  <table class="stat-table">
-    <tr>
-      <th>STR</th>
-      <th>CON</th>
-      <th>INT</th>
-      <th>SPR</th>
-      <th>DEX</th>
-    </tr>
-    <tr>
-      <td>
-        <span id="actual-str">0</span>
-      </td>
-      <td>
-        <span id="actual-con">0</span>
-      </td>
-      <td>
-        <span id="actual-int">0</span>
-      </td>
-      <td>
-        <span id="actual-spr">0</span>
-      </td>
-      <td>
-        <span id="actual-dex">0</span>
-      </td>
-    </tr>
-  </table>
-
+  <div class="row">
+    <div class="col-md-2">
+      STR
+      <span id="actual-str" class="form-control">0</span>
+    </div>
+    <div class="col-md-2">
+      CON
+      <span id="actual-con" class="form-control">0</span>
+    </div>
+    <div class="col-md-2">
+      INT
+        <span id="actual-int" class="form-control">0</span>
+    </div>
+    <div class="col-md-2">
+      SPR
+      <span id="actual-spr" class="form-control">0</span>
+    </div>
+	<div class="col-md-2">
+      DEX
+      <span id="actual-dex" class="form-control">0</span>
+    </div>
+  </div>
+ 
   <p>
   <h3>HP: <span id="hp"></span></h3>
   </p>
@@ -119,7 +129,7 @@
   </p>
   <div><img src="45811.jpg" alt="por" width="100px"></div>
   <div><small>Cr. LegendaryChinCop</small></div>
-
+</div>
   <script src="script.js"></script>
 </body>
 </html>
