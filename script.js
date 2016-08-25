@@ -2,7 +2,7 @@ function calculate(){
   //base info
   var baseClass = document.getElementById("base-class").value;
   var level = document.getElementById("level").value;
-
+  var rank = document.getElementById("rank").value;
   //stat
   var invesStr = parseInt(document.getElementById("inves-str").value);
   var invesCon = parseInt(document.getElementById("inves-con").value);
@@ -21,6 +21,9 @@ function calculate(){
   var baseInt = 0;
   var baseSpr = 0;
   var baseDex = 0;
+  var hpMod = 0;
+  var spMod = 0;
+  //basestat
   switch(baseClass) {
     case "swordman":
         baseStr = 7;
@@ -28,6 +31,8 @@ function calculate(){
         baseInt = 2;
         baseSpr = 3;
         baseDex = 5;
+		hpMod = 3.3;
+		spMod = 0.8;
         break;
     case "wizard":
         baseStr = 3;
@@ -35,6 +40,8 @@ function calculate(){
         baseInt = 8;
         baseSpr = 7;
         baseDex = 4;
+		hpMod = 1.1;
+		spMod = 1.2;
         break;
     case "archer":
         baseStr = 6;
@@ -42,6 +49,8 @@ function calculate(){
         baseInt = 3;
         baseSpr = 4;
         baseDex = 8;
+		hpMod = 1.4;
+		spMod = 0.9;
         break;
     case "cleric":
         baseStr = 5;
@@ -49,14 +58,17 @@ function calculate(){
         baseInt = 4;
         baseSpr = 4;
         baseDex = 3;
+		hpMod = 1.5;
+		spMod = 1.2;
         break;
   }
 
-  var actualStr = Math.ceil(((baseStr + invesStr + getBonusStat(baseStr + invesStr)) * 1.6) + itemStr);
-  var actualCon = Math.ceil(baseCon + invesCon + getBonusStat(baseCon + invesCon) + itemCon);
-  var actualInt = Math.ceil(((baseInt + invesInt + getBonusStat(baseInt + invesInt)) * 1.6) + itemInt);
-  var actualSpr = Math.ceil(baseSpr + invesSpr + getBonusStat(baseSpr + invesSpr) + itemSpr);
-  var actualDex = Math.ceil(baseDex + invesDex + getBonusStat(baseDex + invesDex) + itemDex);
+  // bonus str/int เรามั่ว
+  var actualStr = Math.ceil(((calBonusStat(invesStr) + baseStr + invesStr)* (1 + ((rank - 1)/10))) + itemStr);
+  var actualCon = Math.ceil(calBonusStat(invesCon) + baseCon + invesCon + itemCon);
+  var actualInt = Math.ceil(((calBonusStat(invesInt) + baseInt + invesInt) * (1 + ((rank - 1)/10))) + itemInt);
+  var actualSpr = Math.ceil(calBonusStat(invesSpr) + baseSpr + invesSpr + itemSpr);
+  var actualDex = Math.ceil(calBonusStat(invesDex) + baseDex + invesDex + itemDex);
   // Display Stat Result
   document.getElementById("actual-str").innerHTML = actualStr;
   document.getElementById("actual-con").innerHTML = actualCon;
@@ -64,38 +76,58 @@ function calculate(){
   document.getElementById("actual-spr").innerHTML = actualSpr;
   document.getElementById("actual-dex").innerHTML = actualDex;
 
-  //HP
-  var multiplier = 0;
-  switch(baseClass) {
-    case "swordman":
-        multiplier = 3.3;
-        break;
-    case "wizard":
-        multiplier = 1.1;
-        break;
-    case "archer":
-        multiplier = 1.4;
-        break;
-    case "cleric":
-        multiplier = 1.5;
-        break;
-  }
-  var hp = Math.ceil((multiplier * (level-1) * 17) + (actualCon * 85));
+  //hp
+  var hp = Math.ceil((hpMod * (level-1) * 17) + (actualCon * 85));
   document.getElementById("hp").innerHTML = hp;
+  
+  //sp
+  var sp = (spMod * (level-1) * 6.7) + (actualSpr * 13);
+  if( baseClass === "cleric" )
+  {
+	  sp = sp + (level * 1.675);
+  }
+  sp = Math.ceil(sp);
+  document.getElementById("sp").innerHTML = sp;	
+  
+  //HP recov
+  var hpre = Math.ceil(level * 0.5) + actualCon;
+  document.getElementById("hpre").innerHTML = hpre;
+    
+  //SP recov
+  var spre = (level * 0.5) + actualSpr;
+  if( baseClass === "cleric" )
+  {
+	  spre = spre + (level * 0.25);
+  }
+  Math.ceil(spre);
+  document.getElementById("spre").innerHTML = spre;
+  
 }
 
-function getBonusStat(statValue) {
-    statBonus = 0;
-    if(statValue < 51) {
-      statBonus = statValue / 5;
-    } else if(statValue < 151) {
-      statBonus = 50 / 5 + (statValue - 50) / 4;
-    } else if(statValue < 301) {
-      statBonus = 50 / 5 + 100 / 4 + (statValue - 150) / 3;
-    } else if(statValue < 501) {
-      statBonus = 50 / 5 + 100 / 4 + 150 / 3 + (statValue - 300) / 2;
-    } else {
-      statBonus = 50 / 5 + 100 / 4 + 150 / 3 + 200 / 2 + (statValue - 500);
+
+function calBonusStat(invesStat){
+  var result = 0;
+  for (var i = 0; i <= invesStat; i++) {
+    //result++;
+    if (i >= 1 && i <= 50) {
+      if (i%5===0) {
+        result++;
+      }
+    }else if (i >= 51 && i <= 150) {
+      if (i%4===0) {
+        result++;
+      }
+    }else if (i >= 151 && i <= 300) {
+      if (i%3===0) {
+        result++;
+      }
+    }else if (i >= 300 && i <= 500) {
+      if (i%2===0) {
+        result++;
+      }
+    }else if (i >= 501) {
+      result++;
     }
-    return Math.ceil(statBonus);
-};
+  }
+  return result;
+}
