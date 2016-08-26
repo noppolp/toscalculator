@@ -12,6 +12,8 @@
 
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <link rel="stylesheet" media="screen" href="style.css" />
 </head>
@@ -88,50 +90,55 @@
     </div>
   </div>
   
-  
-  <p>
-    <input type="button" value="Calculate" onclick="calculate()">
-  </p>
-
-  <p>Actual Stat Point</p>
-  <div class="row">
-    <div class="col-md-3 col-xs-3">
-      STR
-      <span id="actual-str" class="form-control">0</span>
+  <button type="button" class="btn btn-success" onclick="calculate()">Show</button>
+  <div class="collapse">
+    <p>Actual Stat Point</p>
+    <div class="row">
+      <div class="col-md-3 col-xs-3">
+        STR
+        <span id="actual-str" class="form-control">0</span>
+      </div>
+      <div class="col-md-2 col-xs-2">
+        CON
+        <span id="actual-con" class="form-control">0</span>
+      </div>
+      <div class="col-md-2 col-xs-2">
+        INT
+          <span id="actual-int" class="form-control">0</span>
+      </div>
+      <div class="col-md-2 col-xs-2">
+        SPR
+        <span id="actual-spr" class="form-control">0</span>
+      </div>
+	  <div class="col-md-3 col-xs-3">
+        DEX
+        <span id="actual-dex" class="form-control">0</span>
+      </div>
     </div>
-    <div class="col-md-2 col-xs-2">
-      CON
-      <span id="actual-con" class="form-control">0</span>
-    </div>
-    <div class="col-md-2 col-xs-2">
-      INT
-        <span id="actual-int" class="form-control">0</span>
-    </div>
-    <div class="col-md-2 col-xs-2">
-      SPR
-      <span id="actual-spr" class="form-control">0</span>
-    </div>
-	<div class="col-md-3 col-xs-3">
-      DEX
-      <span id="actual-dex" class="form-control">0</span>
-    </div>
+    
+    <p>
+    <h3>HP: <span id="hp"></span></h3>
+    </p>
+    <p>
+    <h3>SP: <span id="sp"></span></h3>
+    </p>
+    <p>
+    <h3>HP Recovery: <span id="hpre"></span></h3>
+    </p>
+    <p>
+    <h3>SP Recovery: <span id="spre"></span></h3>
+    </p>
   </div>
- 
-  <p>
-  <h3>HP: <span id="hp"></span></h3>
-  </p>
-  <p>
-  <h3>SP: <span id="sp"></span></h3>
-  </p>
-  <p>
-  <h3>HP Recovery: <span id="hpre"></span></h3>
-  </p>
-  <p>
-  <h3>SP Recovery: <span id="spre"></span></h3>
-  </p>
   <div><img src="45811.jpg" alt="por" width="100px"></div>
   <div><small>Cr. LegendaryChinCop</small></div>
 </div>
   <script src="script.js"></script>
+  <script>
+    $(document).ready(function(){
+        $(".btn-success").click(function(){
+            $(".collapse").collapse('show');
+        });
+    });
+  </script>
 </body>
 </html>
